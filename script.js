@@ -7,6 +7,7 @@ let currentPlayer = 'X';
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let gameOver = false;
 
+//this checks the winner
 function checkWinner() {
   const winPatterns = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -27,7 +28,7 @@ function checkWinner() {
 
   return null;
 }
-
+// if the board is full the game ends
 function handleCellClick(event) {
   const cell = event.target;
   const index = Array.from(cells).indexOf(cell);
@@ -39,6 +40,7 @@ function handleCellClick(event) {
   gameBoard[index] = currentPlayer;
   cell.textContent = currentPlayer;
 
+  // this tells the game if it's a draw or there's a winner
   const winner = checkWinner();
   if (winner) {
     gameOver = true;
@@ -54,6 +56,7 @@ function handleCellClick(event) {
   }
 }
 
+//this restarts the game
 function restartGame() {
   currentPlayer = 'X';
   gameBoard = ['', '', '', '', '', '', '', '', ''];
@@ -65,5 +68,6 @@ function restartGame() {
   winnerAlert.classList.add('d-none');
 }
 
+//this button restarts the game when clicked
 cells.forEach(cell => cell.addEventListener('click', handleCellClick));
 restartButton.addEventListener('click', restartGame);
